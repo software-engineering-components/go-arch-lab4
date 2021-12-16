@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/software-engineering-components/go-arch-lab4/commands"
 	"github.com/software-engineering-components/go-arch-lab4/engine"
 )
 
@@ -27,11 +28,8 @@ func main() {
 	scanner := bufio.NewScanner(input)
 	for scanner.Scan() {
 		commandLine := scanner.Text()
-		cmd, err := parse(commandLine)
-		if err != nil {
-			log.Fatal("error occured while parsing command %s", err)
-			return
-		}
+		cmd := commands.Parse(commandLine)
+
 		eventLoop.Post(cmd)
 	}
 
